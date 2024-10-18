@@ -1,0 +1,58 @@
+<odoo>
+    <!-- Form View Definition -->
+    <record id="view_national_id_form" model="ir.ui.view">
+        <field name="name">national.id.form</field>
+        <field name="model">national.id</field>
+        <field name="arch" type="xml">
+            <form string="National ID">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="user_id"/>
+                        <field name="full_name"/>
+                        <field name="date_of_birth"/>
+                        <field name="gender"/>
+                        <field name="address"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="nationality"/>
+                        <field name="picture" widget="image"/>
+                        <field name="lc_reference_letter" widget="binary"/>
+                        <field name="application_date" readonly="1"/>
+                        <field name="state" readonly="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Submit" type="object" name="action_submit" attributes="{'invisible': [('state', '!=', 'draft')]}" /> 
+                    <button string="Approve" type="object" name="action_approve" attributes="{'invisible': [('state', '!=', 'submitted')]}" />
+                    <button string="Reject" type="object" name="action_reject" attributes="{'invisible': [('state', '!=', 'submitted')]}" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View Definition -->
+    <record id="view_national_id_tree" model="ir.ui.view">
+        <field name="name">national.id.tree</field>
+        <field name="model">national.id</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="full_name"/>
+                <field name="date_of_birth"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action Definition -->
+    <record id="action_national_id" model="ir.actions.act_window">
+        <field name="name">National IDs</field>
+        <field name="res_model">national.id</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item Definitions -->
+    <menuitem id="menu_national_id_root" name="National ID" sequence="10"/>
+    <menuitem id="menu_national_id" name="National IDs" parent="menu_national_id_root" action="action_national_id" sequence="10"/>
+</odoo>
